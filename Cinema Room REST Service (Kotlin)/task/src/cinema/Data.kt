@@ -1,9 +1,13 @@
 package cinema
 
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
+import java.util.UUID
+
 class Cinema(
     val total_rows: Int,
     val total_columns: Int,
-    val available_seats: List<Seat>
+    val available_seats: MutableList<Seat>
 ){}
 
 data class Seat(val row: Int, val column: Int, val price: Int)
@@ -11,7 +15,7 @@ data class Seat(val row: Int, val column: Int, val price: Int)
 val CINEMA = Cinema(
     9,
     9,
-    listOf(
+    mutableListOf(
         Seat(1, 1, 10),
         Seat(1, 2, 10),
         Seat(1, 3, 10),
@@ -104,6 +108,20 @@ val CINEMA = Cinema(
     )
 )
 
+data class Token(val token: String) {
+    companion object {
+        @JvmStatic
+        @JsonCreator
+        fun fromJson(@JsonProperty("token") token: String): Token {
+            return Token(token)
+        }
+    }
+}
 class Purchase(val row: Int, val column: Int)
-data class Purchased(val row: Int, val column: Int, val price: Int)
+data class Ticket(val row: Int, val column: Int, val price: Int)
+
+data class Purchased(
+    val token: String,
+    val ticket: Ticket
+)
 var PURCHASED = mutableListOf<Purchased>()

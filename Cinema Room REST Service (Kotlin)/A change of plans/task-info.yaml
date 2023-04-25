@@ -584,5 +584,8 @@ files:
     class ErrorException (error: String): RuntimeException(error)
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/20459#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Tue, 25 Apr 2023 10:21:41 UTC"
+record: 3
